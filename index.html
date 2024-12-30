@@ -25,70 +25,89 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Buton frumos */
-    button {
-      padding: 15px 25px;
-      font-size: 18px;
-      color: white;
-      background: rgba(0, 0, 0, 0.7);
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.2s, background 0.3s;
-    }
-
-    button:hover {
-      background: rgba(0, 0, 0, 0.9);
-      transform: scale(1.1);
-    }
-
-    /* Textul care apare */
-    #info {
-      margin-top: 20px;
-      font-size: 22px;
+    /* Container pentru text si buton */
+    .container {
       text-align: center;
       max-width: 500px;
     }
 
-    .hidden {
-      display: none;
+    /* Buton alb cu efect la hover */
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      color: black;
+      background-color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Lista cu linkuri si logouri */
+    #info {
+      margin-top: 20px;
+      font-size: 22px;
+      text-align: left;
+    }
+
+    .info-item {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .info-item img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #ffeb00;
     }
   </style>
 </head>
 <body>
-  <div>
-    <button id="showButton">Show Info</button>
-    <div id="info"></div>
+  <div class="container">
+    <h1>Welcome to My Beautiful Page!</h1>
+    <div id="info">
+      <!-- Linkuri cu logouri -->
+      <div class="info-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/TikTok_logo_2023.svg" alt="TikTok Logo">
+        <a href="https://www.tiktok.com/@Catalinulwu1234" target="_blank">TikTok: Catalinulwu1234</a>
+      </div>
+      <div class="info-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/YouTube_Logo_2015.png" alt="YouTube Logo">
+        <a href="https://www.youtube.com/c/CatalinGamingYT" target="_blank">YouTube: CatalinGamingYT</a>
+      </div>
+      <div class="info-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Roblox_Logo.png" alt="Roblox Logo">
+        <a href="https://www.roblox.com/users/12345678/profile" target="_blank">Roblox: CatalinGamingYT1</a>
+      </div>
+      <div class="info-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Instagram_Logo_2022.svg" alt="Instagram Logo">
+        <a href="https://www.instagram.com/CatalinInsta" target="_blank">Instagram: CatalinInsta</a>
+      </div>
+      <div class="info-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Twitter_Logo_2021.svg" alt="Twitter Logo">
+        <a href="https://twitter.com/CatalinTweet" target="_blank">Twitter: CatalinTweet</a>
+      </div>
+    </div>
+    <button>Click Me!</button>
   </div>
-
-  <script>
-    // Informațiile care apar pe rând
-    const infos = [
-      "TikTok: Catalinulwu1234",
-      "YouTube: CatalinGamingYT",
-      "Roblox: CatalinGamingYT1",
-      "Instagram: CatalinInsta",
-      "Twitter: CatalinTweet"
-    ];
-
-    let index = 0;
-
-    // Elementele HTML
-    const infoDiv = document.getElementById("info");
-    const button = document.getElementById("showButton");
-
-    // Eveniment click pe buton
-    button.addEventListener("click", () => {
-      if (index < infos.length) {
-        const paragraph = document.createElement("p");
-        paragraph.textContent = infos[index];
-        infoDiv.appendChild(paragraph);
-        index++;
-      } else {
-        button.disabled = true;
-        button.textContent = "All Info Displayed!";
-      }
-    });
-  </script>
 </body>
 </html>
