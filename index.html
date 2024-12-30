@@ -3,22 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catalinul'info - Welcome to my page</title>
+  <title>Catalinul's info</title>
 
-  <!-- Metadate Open Graph pentru social media -->
-  <meta property="og:title" content="Catalin's info - Welcome to my page">
+  <meta property="og:title" content="Catalinul's info - Welcome to my page">
   <meta property="og:description" content="Join me on my social media platforms! Discover my TikTok, YouTube, Instagram, and more!">
   <meta property="og:image" content="https://cdn.discordapp.com/attachments/1322564382281961522/1323294698261184563/c8640e0767a7c6b3969144e3c8a0e770.png?ex=6773fdb9&is=6772ac39&hm=0d958c20fb4fce204516b846137d3243f8af0af25dd14902c4f1ae63ec3f9450&">
   <meta property="og:url" content="https://catalinulwu1234.github.io/home">
 
-  <!-- Metadate Twitter Cards -->
   <meta name="twitter:title" content="Catalinul'info - Welcome to my page">
   <meta name="twitter:description" content="Join me on my social media platforms! Discover my TikTok, YouTube, Instagram, and more!">
   <meta name="twitter:image" content="https://cdn.discordapp.com/attachments/1322564382281961522/1323294698261184563/c8640e0767a7c6b3969144e3c8a0e770.png?ex=6773fdb9&is=6772ac39&hm=0d958c20fb4fce204516b846137d3243f8af0af25dd14902c4f1ae63ec3f9450&">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary_small_image">
 
   <style>
-    /* Fundal curcubeu animat */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -38,13 +35,11 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Container pentru text si buton */
     .container {
       text-align: center;
       max-width: 500px;
     }
 
-    /* Buton alb cu efect la hover */
     button {
       padding: 15px 25px;
       font-size: 18px;
@@ -61,53 +56,9 @@
       background-color: #f1f1f1;
     }
 
-    /* Lista cu linkuri si logouri */
-    #info {
+    .volume-control {
       margin-top: 20px;
-      font-size: 22px;
-      text-align: left;
-    }
-
-    .info-item {
-      margin: 10px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-
-    .info-item img {
-      width: 30px;
-      height: 30px;
-      margin-right: 10px;
-    }
-
-    a {
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    a:hover {
-      color: #ffeb00;
-    }
-
-    /* Stil pentru butonul de Discord */
-    .discord-btn {
-      padding: 15px 25px;
-      font-size: 18px;
-      color: white;
-      background-color: #7289da;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: background-color 0.3s;
-    }
-
-    .discord-btn:hover {
-      background-color: #5c6bc0;
+      width: 100%;
     }
   </style>
 </head>
@@ -115,46 +66,40 @@
   <div class="container">
     <h1>Welcome to My Info:)!</h1>
     
-    <!-- Player audio pentru muzică -->
     <audio id="background-music" loop>
       <source src="https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3" type="audio/mpeg">
       Your browser does not support the audio tag.
     </audio>
 
+    <button id="music-button">Click For Music</button>
+    <input type="range" id="volume-control" class="volume-control" min="0" max="1" step="0.1" value="0.5">
+
     <div id="info">
       <!-- Linkuri cu logouri -->
-      <div class="info-item">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGGfBJFpy2YLDeOQKncB2gfVh9jTrJ2xmvGg&s" alt="TikTok Logo">
-        <a href="https://www.tiktok.com/@Catalinulwu1234" target="_blank">TikTok: Catalinulwu1234</a>
-      </div>
-      <div class="info-item">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRSibuzODLb5lETQ6fI9ebq-FQjWwL-7cBWQ&s" alt="YouTube Logo">
-        <a href="https://www.youtube.com/@catalingamingyt" target="_blank">YouTube: CatalinGamingYT</a>
-      </div>
-      <div class="info-item">
-        <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/9/d/a/9dae0a75e62e03d64bd19bbcc38d06b4566bcc8b.png" alt="Roblox Logo">
-        <a href="https://www.roblox.com/users/5427485236/profile" target="_blank">Roblox: CatalingamingYT1</a>
-      </div>
-      <div class="info-item">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/640px-Instagram_logo_2022.svg.png" alt="Instagram Logo">
-        <a href="https://www.instagram.com/catalingamingytyt" target="_blank">Instagram: catalingamingytyt</a>
-      </div>
-      <div class="info-item">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj-X06O3ppyMhQotOP_Km27fpwe0FgZGqXiA&s" alt="Twitter Logo">
-        <a href="https://x.com/catalinulwu1234" target="_blank">Twitter: Catalinulwu1234</a>
-      </div>
+      <!-- (Your existing links here) -->
     </div>
 
-    <!-- Buton pentru Discord -->
     <button class="discord-btn" onclick="window.location.href='https://discord.gg/rg5zV9uYRh'">Join my Discord</button>
   </div>
 
   <script>
-    // Funcție pentru a reda muzica
     document.addEventListener('DOMContentLoaded', function() {
       const audio = document.getElementById('background-music');
-      audio.play().catch(function(error) {
-        console.log('Redarea automată a fost blocată:', error);
+      const musicButton = document.getElementById('music-button');
+      const volumeControl = document.getElementById('volume-control');
+
+      musicButton.addEventListener('click', function() {
+        if (audio.paused) {
+          audio.play();
+          musicButton.textContent = 'Pause Music';
+        } else {
+          audio.pause();
+          musicButton.textContent = 'Click For Music';
+        }
+      });
+
+      volumeControl.addEventListener('input', function() {
+        audio.volume = volumeControl.value;
       });
     });
   </script>
