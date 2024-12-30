@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -13,7 +13,7 @@
   <meta name="twitter:title" content="Catalinul'info - Welcome to my page">
   <meta name="twitter:description" content="Join me on my social media platforms! Discover my TikTok, YouTube, Instagram, and more!">
   <meta name="twitter:image" content="https://cdn.discordapp.com/attachments/1322564382281961522/1323294698261184563/c8640e0767a7c6b3969144e3c8a0e770.png?ex=6773fdb9&is=6772ac39&hm=0d958c20fb4fce204516b846137d3243f8af0af25dd14902c4f1ae63ec3f9450&">
-  <meta name="twitter:card" content="summary_small_image">
+  <meta name="twitter:card" content="summary_large_image">
 
   <style>
     body {
@@ -136,17 +136,37 @@
       </div>
     </div>
 
-    <!-- Buton pentru Discord -->
+    <!-- Button for Discord -->
     <button class="discord-btn" onclick="window.location.href='https://discord.gg/rg5zV9uYRh'">Join my Discord</button>
     
-    <!-- Buton pentru muzica -->
+    <!-- Music Control Buttons -->
     <button id="music-button">Click For Music</button>
+    <button id="prev-music"> &lt; Previous Music </button>
+    <button id="next-music"> Next Music &gt; </button>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const audio = document.getElementById('background-music');
       const musicButton = document.getElementById('music-button');
+      const prevButton = document.getElementById('prev-music');
+      const nextButton = document.getElementById('next-music');
+
+      const tracks = [
+        "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3",
+        "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis - FUNK DO BOUNCE [Brazilian Funk].mp3", // Replace with your actual track URL
+        "https://example.com/track3.mp3", // Replace with your actual track URL
+        "https://example.com/track4.mp3"  // Replace with your actual track URL
+      ];
+      
+      let currentTrackIndex = 0;
+
+      function playTrack(index) {
+        audio.src = tracks[index];
+        audio.load();
+        audio.play();
+        musicButton.textContent = 'Pause Music';
+      }
 
       musicButton.addEventListener('click', function() {
         if (audio.paused) {
@@ -156,6 +176,16 @@
           audio.pause();
           musicButton.textContent = 'Click For Music';
         }
+      });
+
+      nextButton.addEventListener('click', function() {
+        currentTrackIndex = (currentTrackIndex + 1) % tracks.length; // Loop back to the first track
+        playTrack(currentTrackIndex);
+      });
+
+      prevButton.addEventListener('click', function() {
+        currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length; // Loop back to the last track
+        playTrack(currentTrackIndex);
       });
     });
   </script>
