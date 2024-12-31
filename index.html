@@ -102,11 +102,6 @@
     .discord-btn:hover {
       background-color: #5c6bc0;
     }
-
-    #countdown {
-      font-size: 28px;
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
@@ -148,9 +143,6 @@
     <button id="music-button">Click For Music</button>
     <button id="prev-music"> &lt; Previous Music </button>
     <button id="next-music"> Next Music &gt; </button>
-
-    <!-- Countdown and New Year Message -->
-    <div id="countdown"></div>
   </div>
 
   <script>
@@ -182,40 +174,19 @@
           musicButton.textContent = 'Pause Music';
         } else {
           audio.pause();
-          musicButton.textContent = 'Play Music';
+          musicButton.textContent = 'Click For Music';
         }
-      });
-
-      prevButton.addEventListener('click', function() {
-        currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
-        playTrack(currentTrackIndex);
       });
 
       nextButton.addEventListener('click', function() {
-        currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+        currentTrackIndex = (currentTrackIndex + 1) % tracks.length; // Loop back to the first track
         playTrack(currentTrackIndex);
       });
 
-      // Countdown Timer Functionality
-      function updateCountdown() {
-        const targetDate = new Date('2025-01-01T00:00:00Z');
-        const now = new Date();
-        const remainingTime = targetDate - now;
-
-        if (remainingTime <= 0) {
-          document.getElementById('countdown').innerHTML = 'Happy New Year!';
-          return;
-        }
-
-        const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-
-        document.getElementById('countdown').innerHTML = `Countdown to New Year: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-      }
-
-      setInterval(updateCountdown, 1000);  // Update every second
+      prevButton.addEventListener('click', function() {
+        currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length; // Loop back to the last track
+        playTrack(currentTrackIndex);
+      });
     });
   </script>
 </body>
