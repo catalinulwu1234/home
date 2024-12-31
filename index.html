@@ -102,6 +102,11 @@
     .discord-btn:hover {
       background-color: #5c6bc0;
     }
+
+    #countdown {
+      font-size: 28px;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -143,6 +148,9 @@
     <button id="music-button">Click For Music</button>
     <button id="prev-music"> &lt; Previous Music </button>
     <button id="next-music"> Next Music &gt; </button>
+
+    <!-- Countdown and New Year Message -->
+    <div id="countdown"></div>
   </div>
 
   <script>
@@ -174,19 +182,41 @@
           musicButton.textContent = 'Pause Music';
         } else {
           audio.pause();
-          musicButton.textContent = 'Click For Music';
+          musicButton.textContent = 'Play Music';
         }
       });
 
-      nextButton.addEventListener('click', function() {
-        currentTrackIndex = (currentTrackIndex + 1) % tracks.length; // Loop back to the first track
+      prevButton.addEventListener('click', function() {
+        currentTrackIndex = (currentTrackIndex === 0) ? tracks.length - 1 : currentTrackIndex - 1;
         playTrack(currentTrackIndex);
       });
 
-      prevButton.addEventListener('click', function() {
-        currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length; // Loop back to the last track
+      nextButton.addEventListener('click', function() {
+        currentTrackIndex = (currentTrackIndex === tracks.length - 1) ? 0 : currentTrackIndex + 1;
         playTrack(currentTrackIndex);
       });
+
+      // New Year Countdown
+      const countdownElement = document.getElementById('countdown');
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const newYear = new Date('Jan 1, 2025 00:00:00').getTime();
+        const distance = newYear - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+        countdownElement.innerHTML = `${days} days ${hours} hours ${minutes} minutes until the New Year!`;
+
+        if (distance < 0) {
+          countdownElement.innerHTML = "An Nou fericit!";
+        }
+      }
+
+      setInterval(updateCountdown, 60000); // Update every minute
+      updateCountdown();
     });
   </script>
 </body>
