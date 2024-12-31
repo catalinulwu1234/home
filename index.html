@@ -4,14 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catalinul's info</title>
+
   <meta property="og:title" content="Catalinul's info - Welcome to my page">
   <meta property="og:description" content="Join me on my social media platforms! Discover my TikTok, YouTube, Instagram, and more!">
   <meta property="og:image" content="https://cdn.discordapp.com/attachments/1322564382281961522/1323294698261184563/c8640e0767a7c6b3969144e3c8a0e770.png?ex=6773fdb9&is=6772ac39&hm=0d958c20fb4fce204516b846137d3243f8af0af25dd14902c4f1ae63ec3f9450&">
   <meta property="og:url" content="https://catalinulwu1234.github.io/home">
+
   <meta name="twitter:title" content="Catalinul'info - Welcome to my page">
   <meta name="twitter:description" content="Join me on my social media platforms! Discover my TikTok, YouTube, Instagram, and more!">
   <meta name="twitter:image" content="https://cdn.discordapp.com/attachments/1322564382281961522/1323294698261184563/c8640e0767a7c6b3969144e3c8a0e770.png?ex=6773fdb9&is=6772ac39&hm=0d958c20fb4fce204516b846137d3243f8af0af25dd14902c4f1ae63ec3f9450&">
   <meta name="twitter:card" content="summary_small_image">
+
   <style>
     body {
       margin: 0;
@@ -24,8 +27,6 @@
       background-size: 400% 400%;
       animation: rainbow 8s infinite;
       color: white;
-      flex-direction: column;
-      overflow: hidden;
     }
 
     @keyframes rainbow {
@@ -53,23 +54,6 @@
 
     button:hover {
       background-color: #f1f1f1;
-    }
-
-    #timer {
-      font-size: 40px;
-      margin-top: 20px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      position: absolute;
-      bottom: 20px;
-    }
-
-    #timer:hover {
-      transform: scale(1.2);
-    }
-
-    .hidden {
-      display: none;
     }
 
     #info {
@@ -118,21 +102,44 @@
     .discord-btn:hover {
       background-color: #5c6bc0;
     }
+
+    #countdown {
+      font-size: 30px;
+      font-weight: bold;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      color: #fff;
+      border-radius: 8px;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      text-align: center;
+      z-index: 10;
+      transition: background-color 0.5s;
+    }
+
+    #countdown.finished {
+      background-color: rgba(0, 255, 0, 0.7);
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Welcome to My Info :)!</h1>
-
+    <h1>Welcome to My Info:)!</h1>
+    
     <audio id="background-music" loop>
       <source src="https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3" type="audio/mpeg">
       Your browser does not support the audio tag.
     </audio>
-
-    <div id="timer"></div>
-    <div id="happy-new-year" class="hidden">
-      <h2>Happy New Year!!</h2>
-    </div>
 
     <div id="info">
       <div class="info-item">
@@ -157,12 +164,16 @@
       </div>
     </div>
 
+    <!-- Button for Discord -->
     <button class="discord-btn" onclick="window.location.href='https://discord.gg/rg5zV9uYRh'">Join my Discord</button>
-
+    
+    <!-- Music Control Buttons -->
     <button id="music-button">Click For Music</button>
     <button id="prev-music"> &lt; Previous Music </button>
     <button id="next-music"> Next Music &gt; </button>
   </div>
+
+  <div id="countdown"></div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -173,56 +184,51 @@
 
       const tracks = [
         "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3",
-        "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis - FUNK DO BOUNCE [Brazilian Funk].mp3", 
-        "https://example.com/track3.mp3", 
-        "https://example.com/track4.mp3"
+        "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Takeoff - The Last Rocket (Full Album).mp3"
       ];
+
       let currentTrack = 0;
 
       musicButton.addEventListener('click', function() {
         if (audio.paused) {
           audio.play();
-          musicButton.textContent = 'Pause Music';
+          musicButton.textContent = "Pause Music";
         } else {
           audio.pause();
-          musicButton.textContent = 'Play Music';
+          musicButton.textContent = "Play Music";
         }
       });
 
       prevButton.addEventListener('click', function() {
-        currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+        currentTrack = (currentTrack === 0) ? tracks.length - 1 : currentTrack - 1;
         audio.src = tracks[currentTrack];
         audio.play();
-        musicButton.textContent = 'Pause Music';
       });
 
       nextButton.addEventListener('click', function() {
-        currentTrack = (currentTrack + 1) % tracks.length;
+        currentTrack = (currentTrack === tracks.length - 1) ? 0 : currentTrack + 1;
         audio.src = tracks[currentTrack];
         audio.play();
-        musicButton.textContent = 'Pause Music';
       });
 
-      let timer = document.getElementById('timer');
-      let happyNewYear = document.getElementById('happy-new-year');
-      let seconds = 0;
-      let minutes = 10;
+      const countdownDate = new Date("2025-01-01T00:00:00").getTime();
+      const countdownElement = document.getElementById('countdown');
+      const interval = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
 
-      function updateTimer() {
-        timer.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        if (seconds === 0) {
-          if (minutes === 0) {
-            happyNewYear.classList.remove('hidden');
-          } else {
-            minutes--;
-            seconds = 59;
-          }
+        if (distance <= 0) {
+          clearInterval(interval);
+          countdownElement.textContent = "Happy New Year!";
+          countdownElement.classList.add('finished');
         } else {
-          seconds--;
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
-      }
-
-      setInterval(updateTimer, 1000);
+      }, 1000);
     });
   </script>
 </body>
