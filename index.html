@@ -24,6 +24,8 @@
       background-size: 400% 400%;
       animation: rainbow 8s infinite;
       color: white;
+      flex-direction: column;
+      overflow: hidden;
     }
 
     @keyframes rainbow {
@@ -58,6 +60,8 @@
       margin-top: 20px;
       cursor: pointer;
       transition: transform 0.3s ease;
+      position: absolute;
+      bottom: 20px;
     }
 
     #timer:hover {
@@ -171,27 +175,9 @@
         "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3",
         "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis - FUNK DO BOUNCE [Brazilian Funk].mp3", 
         "https://example.com/track3.mp3", 
-        "https://example.com/track4.mp3"  
+        "https://example.com/track4.mp3"
       ];
-      
-      let currentTrackIndex = 0;
-
-      function playTrack(index) {
-        audio.src = tracks[index];
-        audio.load();
-        audio.play();
-        musicButton.textContent = 'Pause Music';
-      }
-
-      function nextTrack() {
-        currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-        playTrack(currentTrackIndex);
-      }
-
-      function prevTrack() {
-        currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
-        playTrack(currentTrackIndex);
-      }
+      let currentTrack = 0;
 
       musicButton.addEventListener('click', function() {
         if (audio.paused) {
@@ -203,37 +189,40 @@
         }
       });
 
-      prevButton.addEventListener('click', prevTrack);
-      nextButton.addEventListener('click', nextTrack);
+      prevButton.addEventListener('click', function() {
+        currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+        audio.src = tracks[currentTrack];
+        audio.play();
+        musicButton.textContent = 'Pause Music';
+      });
 
-      const countDownDate = new Date("Dec 31, 2024 23:59:59").getTime();
-      const timer = document.getElementById('timer');
-      const happyNewYear = document.getElementById('happy-new-year');
+      nextButton.addEventListener('click', function() {
+        currentTrack = (currentTrack + 1) % tracks.length;
+        audio.src = tracks[currentTrack];
+        audio.play();
+        musicButton.textContent = 'Pause Music';
+      });
+
+      let timer = document.getElementById('timer');
+      let happyNewYear = document.getElementById('happy-new-year');
+      let seconds = 0;
+      let minutes = 10;
 
       function updateTimer() {
-        const now = new Date().getTime();
-        const distance = countDownDate - now;
-
-        if (distance < 0) {
-          clearInterval(timerInterval);
-          timer.classList.add('hidden');
-          happyNewYear.classList.remove('hidden');
+        timer.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        if (seconds === 0) {
+          if (minutes === 0) {
+            happyNewYear.classList.remove('hidden');
+          } else {
+            minutes--;
+            seconds = 59;
+          }
         } else {
-          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-          timer.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+          seconds--;
         }
       }
 
-      const timerInterval = setInterval(updateTimer, 1000);
-      updateTimer();
-      
-      timer.addEventListener('click', function() {
-        document.documentElement.requestFullscreen();
-      });
+      setInterval(updateTimer, 1000);
     });
   </script>
 </body>
