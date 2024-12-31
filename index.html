@@ -102,8 +102,8 @@
     .discord-btn:hover {
       background-color: #5c6bc0;
     }
-
-    /* Countdown banner adjustments */
+    
+        /* Countdown banner adjustments */
     #banner {
       position: absolute;
       top: 0;
@@ -131,18 +131,17 @@
       font-weight: bold;
       color: #fff;
     }
-
   </style>
 </head>
 <body>
-  <div id="banner">
+      <div id="banner">
     <p>Happy New Year Countdown:</p>
     <span id="countdown"></span>
   </div>
 
   <div class="container">
     <h1>Welcome to My Info:)!</h1>
-
+    
     <audio id="background-music" loop>
       <source src="https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3" type="audio/mpeg">
       Your browser does not support the audio tag.
@@ -171,41 +170,57 @@
       </div>
     </div>
 
-    <button class="discord-btn" onclick="window.location.href='https://discord.gg/ab5jqH7hvJ'">Join My Discord Server</button>
-
-    <button id="music-btn">Play Music</button>
-    <button id="prev-btn">Previous Track</button>
-    <button id="next-btn">Next Track</button>
+    <!-- Button for Discord -->
+    <button class="discord-btn" onclick="window.location.href='https://discord.gg/rg5zV9uYRh'">Join my Discord</button>
+    
+    <!-- Music Control Buttons -->
+    <button id="music-button">Play Music</button>
+    <button id="prev-music"> &lt; Previous Music </button>
+    <button id="next-music"> Next Music &gt; </button>
   </div>
 
   <script>
-    var countdownDate = new Date("Jan 1, 2025 00:00:00").getTime();
+    document.addEventListener('DOMContentLoaded', function() {
+      const audio = document.getElementById('background-music');
+      const musicButton = document.getElementById('music-button');
+      const prevButton = document.getElementById('prev-music');
+      const nextButton = document.getElementById('next-music');
 
-    var countdownFunction = setInterval(function() {
-      var now = new Date().getTime();
-      var distance = countdownDate - now;
+      const tracks = [
+        "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3",
+        "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis - FUNK DO BOUNCE [Brazilian Funk].mp3", // Replace with your actual track URL
+        "https://example.com/track3.mp3", // Replace with your actual track URL
+        "https://example.com/track4.mp3"  // Replace with your actual track URL
+      ];
+      
+      let currentTrackIndex = 0;
 
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
-      + minutes + "m " + seconds + "s ";
-
-      if (distance < 0) {
-        clearInterval(countdownFunction);
-        document.getElementById("countdown").innerHTML = "Happy New Year!";
+      function playTrack(index) {
+        audio.src = tracks[index];
+        audio.load();
+        audio.play();
+        musicButton.textContent = 'Pause Music';
       }
-    }, 1000);
 
-    document.getElementById("music-btn").addEventListener("click", function() {
-      var music = document.getElementById("background-music");
-      if (music.paused) {
-        music.play();
-      } else {
-        music.pause();
-      }
+      musicButton.addEventListener('click', function() {
+        if (audio.paused) {
+          audio.play();
+          musicButton.textContent = 'Pause Music';
+        } else {
+          audio.pause();
+          musicButton.textContent = 'Click For Music';
+        }
+      });
+
+      nextButton.addEventListener('click', function() {
+        currentTrackIndex = (currentTrackIndex + 1) % tracks.length; // Loop back to the first track
+        playTrack(currentTrackIndex);
+      });
+
+      prevButton.addEventListener('click', function() {
+        currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length; // Loop back to the last track
+        playTrack(currentTrackIndex);
+      });
     });
   </script>
 </body>
