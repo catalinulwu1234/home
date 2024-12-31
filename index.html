@@ -187,36 +187,35 @@
       });
 
       prevButton.addEventListener('click', function() {
-        currentTrackIndex = (currentTrackIndex === 0) ? tracks.length - 1 : currentTrackIndex - 1;
+        currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
         playTrack(currentTrackIndex);
       });
 
       nextButton.addEventListener('click', function() {
-        currentTrackIndex = (currentTrackIndex === tracks.length - 1) ? 0 : currentTrackIndex + 1;
+        currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
         playTrack(currentTrackIndex);
       });
 
-      // New Year Countdown
-      const countdownElement = document.getElementById('countdown');
-
+      // Countdown Timer Functionality
       function updateCountdown() {
-        const now = new Date().getTime();
-        const newYear = new Date('Jan 1, 2025 00:00:00').getTime();
-        const distance = newYear - now;
+        const targetDate = new Date('2025-01-01T00:00:00Z');
+        const now = new Date();
+        const remainingTime = targetDate - now;
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-        countdownElement.innerHTML = `${days} days ${hours} hours ${minutes} minutes until the New Year!`;
-
-        if (distance < 0) {
-          countdownElement.innerHTML = "An Nou fericit!";
+        if (remainingTime <= 0) {
+          document.getElementById('countdown').innerHTML = 'Happy New Year!';
+          return;
         }
+
+        const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+        document.getElementById('countdown').innerHTML = `Countdown to New Year: ${days}d ${hours}h ${minutes}m ${seconds}s`;
       }
 
-      setInterval(updateCountdown, 60000); // Update every minute
-      updateCountdown();
+      setInterval(updateCountdown, 1000);  // Update every second
     });
   </script>
 </body>
