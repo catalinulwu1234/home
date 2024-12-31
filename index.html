@@ -130,12 +130,39 @@
       50% { opacity: 0; }
       100% { opacity: 1; }
     }
+
+    /* Banner adjustments */
+    #banner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 24px;
+      z-index: 1000;
+      border-bottom: 5px solid #ffeb00;
+    }
+
+    #banner p {
+      margin: 0;
+    }
   </style>
 </head>
 <body>
+  <div id="banner">
+    <p>Happy New Year Countdown</p>
+    <p id="countdown"></p>
+  </div>
+
   <div class="container">
     <h1>Welcome to My Info:)!</h1>
-    
+
     <audio id="background-music" loop>
       <source src="https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3" type="audio/mpeg">
       Your browser does not support the audio tag.
@@ -164,27 +191,22 @@
       </div>
     </div>
 
-    <!-- Button for Discord -->
-    <button class="discord-btn" onclick="window.location.href='https://discord.gg/rg5zV9uYRh'">Join my Discord</button>
-    
-    <!-- Music Control Buttons -->
-    <button id="music-button">Click For Music</button>
-    <button id="prev-music"> &lt; Previous Music </button>
-    <button id="next-music"> Next Music &gt; </button>
-  </div>
+    <button class="discord-btn" onclick="window.location.href='https://discord.gg/ab5jqH7hvJ'">Join My Discord Server</button>
 
-  <div id="countdown"></div>
+    <button id="music-btn">Play Music</button>
+    <button id="prev-btn">Previous Track</button>
+    <button id="next-btn">Next Track</button>
+  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      const musicButton = document.getElementById('music-btn');
+      const prevButton = document.getElementById('prev-btn');
+      const nextButton = document.getElementById('next-btn');
       const audio = document.getElementById('background-music');
-      const musicButton = document.getElementById('music-button');
-      const prevButton = document.getElementById('prev-music');
-      const nextButton = document.getElementById('next-music');
-
       const tracks = [
-        "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3",
-        "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Takeoff - The Last Rocket (Full Album).mp3"
+        "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis%20Scott%20-%20FE%21N%20(Official%20Audio)%20ft.%20Playboi%20Carti.mp3",
+        "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Takeoff%20-%20The%20Last%20Rocket%20(Full%20Album).mp3"
       ];
 
       let currentTrack = 0;
