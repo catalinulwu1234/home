@@ -103,35 +103,7 @@
       background-color: #5c6bc0;
     }
 
-    #countdown {
-      font-size: 30px;
-      font-weight: bold;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      color: #fff;
-      border-radius: 8px;
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      text-align: center;
-      z-index: 10;
-      transition: background-color 0.5s;
-    }
-
-    #countdown.finished {
-      background-color: rgba(0, 255, 0, 0.7);
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    /* Banner adjustments */
+    /* Countdown banner adjustments */
     #banner {
       position: absolute;
       top: 0;
@@ -141,22 +113,31 @@
       background: rgba(0, 0, 0, 0.7);
       color: white;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       padding: 0 20px;
       font-size: 24px;
       z-index: 1000;
       border-bottom: 5px solid #ffeb00;
+      flex-direction: column;
     }
 
     #banner p {
       margin: 0;
     }
+
+    #countdown {
+      font-size: 30px;
+      font-weight: bold;
+      color: #fff;
+    }
+
   </style>
 </head>
 <body>
   <div id="banner">
-    <p>Happy New Year Countdown: <span id="countdown"></span></p>
+    <p>Happy New Year Countdown:</p>
+    <span id="countdown"></span>
   </div>
 
   <div class="container">
@@ -209,14 +190,23 @@
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+      + minutes + "m " + seconds + "s ";
 
       if (distance < 0) {
         clearInterval(countdownFunction);
         document.getElementById("countdown").innerHTML = "Happy New Year!";
-        document.getElementById("countdown").classList.add("finished");
       }
     }, 1000);
+
+    document.getElementById("music-btn").addEventListener("click", function() {
+      var music = document.getElementById("background-music");
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    });
   </script>
 </body>
 </html>
