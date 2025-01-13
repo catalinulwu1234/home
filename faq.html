@@ -9,7 +9,6 @@
   <meta name="twitter:title" content="FAQ - Frequently Asked Questions">
 
   <style>
-    /* Stiluri pentru fundal și text */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -24,14 +23,12 @@
       text-align: center;
     }
 
-    /* Animatie de fundal */
     @keyframes gradient-animation {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    /* Containerul pentru întrebări și răspunsuri */
     .container {
       background: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
@@ -48,7 +45,6 @@
       font-weight: bold;
     }
 
-    /* Stiluri pentru întrebările și răspunsurile */
     .faq-item {
       background-color: #333;
       border-radius: 8px;
@@ -92,23 +88,41 @@
     a:hover {
       color: #ffeb3b;
     }
+
+    /* Limba Select Box */
+    .language-select {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+      font-size: 1em;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Meniu select limba -->
+  <select class="language-select" id="language-selector">
+    <option value="ro">Română</option>
+    <option value="en" selected>English</option>
+  </select>
+
   <div class="container">
-    <h1>Frequently Asked Questions (FAQ)</h1>
+    <h1 id="faq-title">Frequently Asked Questions (FAQ)</h1>
     
-    <!-- Întrebarea 1 -->
     <div class="faq-item">
-      <div class="question">1. How can I contact you?</div>
-      <div class="answer">You can contact me via email at <a href="mailto:catalinulwu12@gmail.com">catalinulwu12@gmail.com</a> or join my <a href="https://discord.gg/rg5zV9uYRh" target="_blank">Discord server</a>.</div>
+      <div class="question" id="question-1">1. How can I contact you?</div>
+      <div class="answer" id="answer-1">You can contact me via email at <a href="mailto:catalinulwu12@gmail.com">catalinulwu12@gmail.com</a> or join my <a href="https://discord.gg/rg5zV9uYRh" target="_blank">Discord server</a>.</div>
     </div>
 
-    <!-- Întrebarea 2 -->
     <div class="faq-item">
-      <div class="question">2. What are your social media profiles?</div>
-      <div class="answer">You can find me on:
+      <div class="question" id="question-2">2. What are your social media profiles?</div>
+      <div class="answer" id="answer-2">You can find me on:
         <ul style="text-align: left; font-size: 1.1em; margin-top: 10px;">
           <li><a href="https://www.tiktok.com/@Catalinulwu1234" target="_blank">TikTok: @Catalinulwu1234</a></li>
           <li><a href="https://www.youtube.com/@catalingamingyt" target="_blank">YouTube: CatalinGamingYT</a></li>
@@ -117,34 +131,29 @@
       </div>
     </div>
 
-    <!-- Întrebarea 3 -->
     <div class="faq-item">
-      <div class="question">3. Can I join your Discord server?</div>
-      <div class="answer">Yes, of course! You can join my server using this <a href="https://discord.gg/rg5zV9uYRh" target="_blank">link</a>.</div>
+      <div class="question" id="question-3">3. Can I join your Discord server?</div>
+      <div class="answer" id="answer-3">Yes, of course! You can join my server using [this link](https://discord.gg/rg5zV9uYRh).</div>
     </div>
 
-    <!-- Întrebarea 4 -->
     <div class="faq-item">
-      <div class="question">4. Do you collaborate with other creators?</div>
-      <div class="answer">Yes! Feel free to reach out if you're interested in collaborating on a project. You can contact me through my <a href="mailto:catalinulwu12@gmail.com">email</a> or Discord.</div>
+      <div class="question" id="question-4">4. Do you collaborate with other creators?</div>
+      <div class="answer" id="answer-4">Yes! Feel free to reach out if you're interested in collaborating on a project. You can contact me via email or Discord.</div>
     </div>
 
-    <!-- Întrebarea 5 -->
     <div class="faq-item">
-      <div class="question">5. Where can I watch your videos?</div>
-      <div class="answer">You can watch my gaming videos on my YouTube channel: <a href="https://www.youtube.com/@catalingamingyt" target="_blank">CatalinGamingYT</a>.</div>
+      <div class="question" id="question-5">5. Where can I watch your videos?</div>
+      <div class="answer" id="answer-5">You can watch my gaming videos on my YouTube channel: [CatalinGamingYT](https://www.youtube.com/@catalingamingyt).</div>
     </div>
 
-    <!-- Întrebarea 6 -->
     <div class="faq-item">
-      <div class="question">6. Can I suggest a game for you to play?</div>
-      <div class="answer">Sure! I love discovering new games. You can send your suggestions to me via email or Discord!</div>
+      <div class="question" id="question-6">6. Can I suggest a game for you to play?</div>
+      <div class="answer" id="answer-6">Sure! I love discovering new games. You can send your suggestions to me via email or Discord!</div>
     </div>
 
-    <!-- Întrebarea 7 -->
     <div class="faq-item">
-      <div class="question">7. Do you have a playlist of your favorite songs?</div>
-      <div class="answer">Yes! I sometimes share my playlists on social media or Discord. Stay tuned for updates!</div>
+      <div class="question" id="question-7">7. Do you have a playlist of your favorite songs?</div>
+      <div class="answer" id="answer-7">Yes! I sometimes share my playlists on social media or Discord. Stay tuned for updates!</div>
     </div>
 
   </div>
@@ -156,6 +165,67 @@
         const answer = question.nextElementSibling;
         answer.classList.toggle('visible');
       });
+    });
+
+    // Functie pentru schimbarea limbii
+    const langSelector = document.getElementById('language-selector');
+
+    const translations = {
+      en: {
+        title: "Frequently Asked Questions (FAQ)",
+        question1: "How can I contact you?",
+        answer1: "You can contact me via email at <a href='mailto:catalinulwu12@gmail.com'>catalinulwu12@gmail.com</a> or join my <a href='https://discord.gg/rg5zV9uYRh' target='_blank'>Discord server</a>.",
+        question2: "What are your social media profiles?",
+        answer2: "You can find me on:<ul><li><a href='https://www.tiktok.com/@Catalinulwu1234' target='_blank'>TikTok: @Catalinulwu1234</a></li><li><a href='https://www.youtube.com/@catalingamingyt' target='_blank'>YouTube: CatalinGamingYT</a></li><li><a href='https://www.instagram.com/catalingamingytyt' target='_blank'>Instagram: catalingamingytyt</a></li></ul>",
+        question3: "Can I join your Discord server?",
+        answer3: "Yes, of course! You can join my server using [this link](https://discord.gg/rg5zV9uYRh).",
+        question4: "Do you collaborate with other creators?",
+        answer4: "Yes! Feel free to reach out if you're interested in collaborating on a project. You can contact me via email or Discord.",
+        question5: "Where can I watch your videos?",
+        answer5: "You can watch my gaming videos on my YouTube channel: [CatalinGamingYT](https://www.youtube.com/@catalingamingyt).",
+        question6: "Can I suggest a game for you to play?",
+        answer6: "Sure! I love discovering new games. You can send your suggestions to me via email or Discord!",
+        question7: "Do you have a playlist of your favorite songs?",
+        answer7: "Yes! I sometimes share my playlists on social media or Discord. Stay tuned for updates!"
+      },
+      ro: {
+        title: "Întrebări frecvente (FAQ)",
+        question1: "Cum te pot contacta?",
+        answer1: "Mă poți contacta prin email la <a href='mailto:catalinulwu12@gmail.com'>catalinulwu12@gmail.com</a> sau poți să intri pe serverul meu de <a href='https://discord.gg/rg5zV9uYRh' target='_blank'>Discord</a>.",
+        question2: "Care sunt profilurile tale de social media?",
+        answer2: "Mă poți găsi pe:<ul><li><a href='https://www.tiktok.com/@Catalinulwu1234' target='_blank'>TikTok: @Catalinulwu1234</a></li><li><a href='https://www.youtube.com/@catalingamingyt' target='_blank'>YouTube: CatalinGamingYT</a></li><li><a href='https://www.instagram.com/catalingamingytyt' target='_blank'>Instagram: catalingamingytyt</a></li></ul>",
+        question3: "Pot să intru pe serverul tău de Discord?",
+        answer3: "Da, desigur! Poți să intri pe server folosind [acest link](https://discord.gg/rg5zV9uYRh).",
+        question4: "Colaborezi cu alți creatori?",
+        answer4: "Da! Mă poți contacta pentru colaborări prin email sau Discord.",
+        question5: "Unde pot viziona videourile tale?",
+        answer5: "Poți viziona videourile mele pe canalul meu YouTube: [CatalinGamingYT](https://www.youtube.com/@catalingamingyt).",
+        question6: "Pot să-ți sugerez un joc să-l joci?",
+        answer6: "Desigur! Îmi place să descopăr jocuri noi. Poți trimite sugestiile tale prin email sau Discord!",
+        question7: "Ai un playlist cu melodiile tale preferate?",
+        answer7: "Da! Uneori împărtășesc playlisturile mele pe rețelele sociale sau Discord. Fii pe fază pentru noi actualizări!"
+      }
+    };
+
+    langSelector.addEventListener('change', function () {
+      const lang = langSelector.value;
+
+      // Actualizează textul pe pagină în funcție de limba selectată
+      document.getElementById('faq-title').innerText = translations[lang].title;
+      document.getElementById('question-1').innerText = translations[lang].question1;
+      document.getElementById('answer-1').innerHTML = translations[lang].answer1;
+      document.getElementById('question-2').innerText = translations[lang].question2;
+      document.getElementById('answer-2').innerHTML = translations[lang].answer2;
+      document.getElementById('question-3').innerText = translations[lang].question3;
+      document.getElementById('answer-3').innerHTML = translations[lang].answer3;
+      document.getElementById('question-4').innerText = translations[lang].question4;
+      document.getElementById('answer-4').innerHTML = translations[lang].answer4;
+      document.getElementById('question-5').innerText = translations[lang].question5;
+      document.getElementById('answer-5').innerHTML = translations[lang].answer5;
+      document.getElementById('question-6').innerText = translations[lang].question6;
+      document.getElementById('answer-6').innerHTML = translations[lang].answer6;
+      document.getElementById('question-7').innerText = translations[lang].question7;
+      document.getElementById('answer-7').innerHTML = translations[lang].answer7;
     });
   </script>
 
