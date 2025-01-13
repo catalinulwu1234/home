@@ -119,7 +119,7 @@
   <div class="container">
     <h1>Welcome to My Info:)!</h1>
     
-    <audio id="background-music" loop>
+    <audio id="background-music" loop autoplay>
       <source src="https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3" type="audio/mpeg">
       Your browser does not support the audio tag.
     </audio>
@@ -173,20 +173,20 @@
       const volumeLabel = document.querySelector('label[for="volume-control"]');
       const volumeDownButton = document.getElementById('volume-down');
 
-      const tracks = [
+      let tracks = [
         "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3",
         "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis - FUNK DO BOUNCE [Brazilian Funk].mp3",
-        "https://example.com/track3.mp3", // Replace with your actual track URL
-        "https://example.com/track4.mp3"  // Replace with your actual track URL
+        "https://example.com/track3.mp3", 
+        "https://example.com/track4.mp3"
       ];
       
       let currentTrackIndex = 0;
 
       // Function to play the current track
       function playTrack(index) {
-        audio.src = tracks[index]; // Set the audio source
-        audio.load();  // Reload the audio source
-        audio.play();  // Start playing the audio
+        audio.src = tracks[index];
+        audio.load();
+        audio.play();
         musicButton.textContent = 'Pause Music';
       }
 
@@ -230,5 +230,6 @@
       playTrack(currentTrackIndex);
     });
   </script>
+
 </body>
 </html>
