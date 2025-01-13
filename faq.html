@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - Frequently Asked Questions</title>
+  <meta property="og:title" content="FAQ - Frequently Asked Questions">
+  <meta property="og:description" content="Find answers to the most common questions!">
+  <meta name="twitter:title" content="FAQ - Frequently Asked Questions">
+
+  <style>
+    /* Stiluri pentru fundal și text */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      background-size: 400% 400%;
+      animation: gradient-animation 15s ease infinite;
+      color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    /* Animatie de fundal */
+    @keyframes gradient-animation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Containerul pentru întrebări și răspunsuri */
+    .container {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      padding: 30px;
+      width: 80%;
+      max-width: 900px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      color: #ffeb3b;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    /* Stiluri pentru întrebările și răspunsurile */
+    .faq-item {
+      background-color: #333;
+      border-radius: 8px;
+      margin: 15px 0;
+      padding: 20px;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+
+    .faq-item:hover {
+      background-color: #444;
+    }
+
+    .question {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #ffeb3b;
+    }
+
+    .answer {
+      font-size: 1.1em;
+      margin-top: 15px;
+      display: none;
+      color: #f0f0f0;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .answer.visible {
+      display: block;
+      opacity: 1;
+    }
+
+    a {
+      color: #ff4b2b;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #ffeb3b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Frequently Asked Questions (FAQ)</h1>
+    
+    <div class="faq-item">
+      <div class="question">1. What is this website about?</div>
+      <div class="answer">This website is a personal portfolio where you can find links to my social media platforms, gaming profiles, and more!</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">2. How can I contact you?</div>
+      <div class="answer">You can contact me via email or through my <a href="https://discord.gg/rg5zV9uYRh" target="_blank">Discord server</a>.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">3. Can I collaborate with you on projects?</div>
+      <div class="answer">I am open to collaborations! Feel free to reach out through my contact page.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">4. Where can I find your gaming content?</div>
+      <div class="answer">You can find my gaming content on my YouTube channel: <a href="https://www.youtube.com/@catalingamingyt" target="_blank">CatalinGamingYT</a></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">5. What social media platforms are you active on?</div>
+      <div class="answer">I am active on TikTok, YouTube, Instagram, and Twitter. You can find the links to all my profiles on the homepage!</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">6. Can I join your Discord server?</div>
+      <div class="answer">Yes! You can join my Discord server by clicking the button on my homepage or by using the link <a href="https://discord.gg/rg5zV9uYRh" target="_blank">here</a>.</div>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.question').forEach(function(question) {
+      question.addEventListener('click', function() {
+        const answer = question.nextElementSibling;
+        answer.classList.toggle('visible');
+      });
+    });
+  </script>
+
+</body>
+</html>
