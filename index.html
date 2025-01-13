@@ -102,6 +102,16 @@
     .discord-btn:hover {
       background-color: #5c6bc0;
     }
+
+    /* Volume control style */
+    .volume-control {
+      margin-top: 20px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -144,6 +154,13 @@
     <button id="music-button">Click For Music</button>
     <button id="prev-music"> &lt; Previous Music </button>
     <button id="next-music"> Next Music &gt; </button>
+
+    <!-- Volume Control -->
+    <div class="volume-control">
+      <button id="volume-down">Volume Down</button>
+      <input type="range" id="volume-control" min="0" max="2" step="0.01" value="1">
+      <label for="volume-control">Volume: 100%</label>
+    </div>
   </div>
 
   <script>
@@ -152,6 +169,9 @@
       const musicButton = document.getElementById('music-button');
       const prevButton = document.getElementById('prev-music');
       const nextButton = document.getElementById('next-music');
+      const volumeControl = document.getElementById('volume-control');
+      const volumeLabel = document.querySelector('label[for="volume-control"]');
+      const volumeDownButton = document.getElementById('volume-down');
 
       const tracks = [
         "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3",
@@ -191,6 +211,19 @@
       prevButton.addEventListener('click', function() {
         currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
         playTrack(currentTrackIndex);
+      });
+
+      // Adjust volume using the slider
+      volumeControl.addEventListener('input', function() {
+        audio.volume = volumeControl.value;
+        volumeLabel.textContent = `Volume: ${Math.round(audio.volume * 100)}%`;
+      });
+
+      // Decrease volume button
+      volumeDownButton.addEventListener('click', function() {
+        audio.volume = Math.max(0, audio.volume - 0.1);
+        volumeControl.value = audio.volume;
+        volumeLabel.textContent = `Volume: ${Math.round(audio.volume * 100)}%`;
       });
 
       // Initially play the first track
