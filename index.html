@@ -147,48 +147,56 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const audio = document.getElementById('background-music');
-      const musicButton = document.getElementById('music-button');
-      const prevButton = document.getElementById('prev-music');
-      const nextButton = document.getElementById('next-music');
+document.addEventListener('DOMContentLoaded', function() {
+  const audio = document.getElementById('background-music');
+  const musicButton = document.getElementById('music-button');
+  const prevButton = document.getElementById('prev-music');
+  const nextButton = document.getElementById('next-music');
 
-      const tracks = [
-        "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3",
-        "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis - FUNK DO BOUNCE [Brazilian Funk].mp3", // Replace with your actual track URL
-        "https://example.com/track3.mp3", // Replace with your actual track URL
-        "https://example.com/track4.mp3"  // Replace with your actual track URL
-      ];
-      
-      let currentTrackIndex = 0;
+  const tracks = [
+    "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3",
+    "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis - FUNK DO BOUNCE [Brazilian Funk].mp3",
+    "https://example.com/track3.mp3", // Înlocuiește cu URL-ul corect al piesei
+    "https://example.com/track4.mp3"  // Înlocuiește cu URL-ul corect al piesei
+  ];
+  
+  let currentTrackIndex = 0;
 
-      function playTrack(index) {
-        audio.src = tracks[index];
-        audio.load();
-        audio.play();
-        musicButton.textContent = 'Pause Music';
-      }
+  // Funcție pentru a reda piesa curentă
+  function playTrack(index) {
+    audio.src = tracks[index];  // Schimbă sursa audio
+    audio.load();  // Încarcă fișierul audio
+    audio.play();  // Redă fișierul audio
+    musicButton.textContent = 'Pause Music';
+  }
 
-      musicButton.addEventListener('click', function() {
-        if (audio.paused) {
-          audio.play();
-          musicButton.textContent = 'Pause Music';
-        } else {
-          audio.pause();
-          musicButton.textContent = 'Click For Music';
-        }
-      });
+  // Ascultător de evenimente pentru butonul de play/pause
+  musicButton.addEventListener('click', function() {
+    if (audio.paused) {
+      audio.play();
+      musicButton.textContent = 'Pause Music';
+    } else {
+      audio.pause();
+      musicButton.textContent = 'Click For Music';
+    }
+  });
 
-      nextButton.addEventListener('click', function() {
-        currentTrackIndex = (currentTrackIndex + 1) % tracks.length; // Loop back to the first track
-        playTrack(currentTrackIndex);
-      });
+  // Ascultător de evenimente pentru butonul "Next"
+  nextButton.addEventListener('click', function() {
+    currentTrackIndex = (currentTrackIndex + 1) % tracks.length;  // Trecere la următoarea piesă (la sfârșit se revine la prima piesă)
+    playTrack(currentTrackIndex);
+  });
 
-      prevButton.addEventListener('click', function() {
-        currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length; // Loop back to the last track
-        playTrack(currentTrackIndex);
-      });
-    });
+  // Ascultător de evenimente pentru butonul "Previous"
+  prevButton.addEventListener('click', function() {
+    currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;  // Trecere la piesa anterioară (la început se revine la ultima piesă)
+    playTrack(currentTrackIndex);
+  });
+
+  // Redă prima piesă la început
+  playTrack(currentTrackIndex);
+});
+});
   </script>
 </body>
 </html>
