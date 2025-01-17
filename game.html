@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patratul Care Se Misca</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .game-area {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background-color: #3498db;
+        }
+
+        .square {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #e74c3c;
+        }
+
+        .level-box {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #2ecc71;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .line {
+            position: absolute;
+            background-color: black;
+        }
+
+        .line-horizontal {
+            height: 2px;
+            width: 100px;
+        }
+
+        .line-vertical {
+            width: 2px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-area">
+        <div class="square" id="square"></div>
+        <div class="level-box" id="level-box">Nivel: 1</div>
+    </div>
+
+    <script>
+        const square = document.getElementById('square');
+        const gameArea = document.querySelector('.game-area');
+        const levelBox = document.getElementById('level-box');
+
+        let speed = 5;
+        let sprintSpeed = 10;
+
+        let x = 100;  // Poziționăm pătratul roșu la început
+        let y = 100;
+        let lastX = x;
+        let lastY = y;
+
+        let spawnX = 100;
+        let spawnY = 100;
+
+        let currentLevel = 1;
+        let totalLevels = 20;
+
+        let isSprinting = false;
+
+        let keysPressed = {
+            w: false,
+            s: false,
+            a: false,
+            d: false
+        };
+
+        let lines = [];
+
+        // Funcție pentru a genera poziții sigure pentru niveluri
+        function generateSafePosition(excludeX, excludeY) {
+            let safeX, safeY;
+            do {
+                safeX = Math.random() * (gameArea.offsetWidth - 50);
+                safeY = Math.random() * (gameArea.offsetHeight - 50);
+            } while (
+                Math.abs(safeX - excludeX) < 150 || Math.abs(safeY - excludeY) < 150
+            );
+            return { x: safeX, y: safeY };
+        }
+
+        // Funcție pentru a spawn-ui nivelul
+        function spawnLevel() {
+            // Resetăm pozițiile pătratului roșu
+            x = spawnX;
+            y = spawnY;
+            lastX = x;
+            lastY = y;
+            square.style.left = `${lastX}px`;
+            square.style.top = `${lastY}px`;
+
+            // Plasăm obiectul verde (nivelul)
+            const levelPos = generateSafePosition(x, y);
+            levelBox.style.left = `${levelPos.x}px`;
+            levelBox.style.top = `${levelPos.y}px`;
+            levelBox.textContent = `Nivel: ${currentLevel}`;
+
+            // Dacă suntem pe nivelul 1 (sau orice nivel care nu vrei linii), nu generăm linii
+            if (currentLevel > 1) {
+                generateLines();
+            }
+        }
+
+        // Funcție pentru a genera linii negre pe hartă (obstacole)
+        function generateLines() {
+            lines.forEach(line => line.remove());
+            lines = [];
+            let numLines = currentLevel + 3; // Adăugăm mai multe linii pe măsură ce crește dificultatea
+
+            for (let i = 0; i < numLines; i++) {
+                let line = document.createElement('div');
+                line.classList.add('line');
+                const linePos = generateSafePosition(x, y);
+                if (Math.random() > 0.5) {
+                    line.classList.add('line-horizontal');
+                    line.style.top = `${linePos.y}px`;
+                    line.style.left = `${linePos.x}px`;
+                } else {
+                    line.classList.add('line-vertical');
+                    line.style.top = `${linePos.y}px`;
+                    line.style.left = `${linePos.x}px`;
+                }
+                gameArea.appendChild(line);
+                lines.push(line);
+            }
+        }
+
+        // Ascultăm evenimentele de tastatură pentru mișcare
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Shift') {
+                isSprinting = true;
+            }
+            if (e.key === 'w' || e.key === 'ArrowUp') keysPressed.w = true;
+            if (e.key === 's' || e.key === 'ArrowDown') keysPressed.s = true;
+            if (e.key === 'a' || e.key === 'ArrowLeft') keysPressed.a = true;
+            if (e.key === 'd' || e.key === 'ArrowRight') keysPressed.d = true;
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (e.key === 'Shift') {
+                isSprinting = false;
+            }
+            if (e.key === 'w' || e.key === 'ArrowUp') keysPressed.w = false;
+            if (e.key === 's' || e.key === 'ArrowDown') keysPressed.s = false;
+            if (e.key === 'a' || e.key === 'ArrowLeft') keysPressed.a = false;
+            if (e.key === 'd' || e.key === 'ArrowRight') keysPressed.d = false;
+        });
+
+        // Mișcarea pătratului roșu
+        function moveSquare() {
+            let currentSpeed = isSprinting ? sprintSpeed : speed;
+
+            if (keysPressed.w) {
+                y -= currentSpeed;
+            }
+            if (keysPressed.s) {
+                y += currentSpeed;
+            }
+            if (keysPressed.a) {
+                x -= currentSpeed;
+            }
+            if (keysPressed.d) {
+                x += currentSpeed;
+            }
+
+            const stepX = x - lastX;
+            const stepY = y - lastY;
+
+            lastX += stepX / 10;
+            lastY += stepY / 10;
+
+            square.style.left = `${lastX}px`;
+            square.style.top = `${lastY}px`;
+
+            checkCollisionWithLines();
+            checkLevelCompletion();
+        }
+
+        // Verificăm coliziunile cu linii negre
+        function checkCollisionWithLines() {
+            const squareRect = square.getBoundingClientRect();
+
+            lines.forEach(line => {
+                const lineRect = line.getBoundingClientRect();
+                if (squareRect.bottom > lineRect.top && squareRect.top < lineRect.bottom &&
+                    squareRect.left < lineRect.right && squareRect.right > lineRect.left) {
+                    teleportToSpawn();
+                }
+            });
+        }
+
+        // Verificăm completarea nivelului
+        function checkLevelCompletion() {
+            const squareRect = square.getBoundingClientRect();
+            const levelBoxRect = levelBox.getBoundingClientRect();
+
+            if (squareRect.bottom > levelBoxRect.top && squareRect.top < levelBoxRect.bottom &&
+                squareRect.left < levelBoxRect.right && squareRect.right > levelBoxRect.left) {
+                currentLevel++;
+                if (currentLevel <= totalLevels) {
+                    spawnLevel(); // Continuăm la următorul nivel
+                } else {
+                    alert("Felicitări! Ai terminat toate nivelele!");
+                }
+            }
+        }
+
+        // Teleportarea la punctul de start dacă există coliziune
+        function teleportToSpawn() {
+            x = spawnX;
+            y = spawnY;
+            lastX = x;
+            lastY = y;
+            square.style.left = `${lastX}px`;
+            square.style.top = `${lastY}px`;
+        }
+
+        // Animația jocului
+        function animate() {
+            moveSquare();
+            requestAnimationFrame(animate);
+        }
+
+        spawnLevel(); // Începem jocul cu primul nivel
+        animate(); // Începem animația
+    </script>
+</body>
+</html>
