@@ -86,6 +86,49 @@
       font-size: 2rem;
     }
 
+    /* Stiluri pentru slider-ul de volum */
+    .volume-control {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .volume-slider {
+      width: 200px;
+      margin-top: 10px;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 10px;
+      background: #ddd;
+      border-radius: 5px;
+      outline: none;
+      transition: background 0.3s;
+    }
+
+    .volume-slider:hover {
+      background: #ccc;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #1DA1F2;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .volume-slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: #1DA1F2;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
   </style>
 </head>
 <body>
@@ -106,6 +149,12 @@
         <span class="icon">&#9654;&#9654;</span>
       </button>
     </div>
+
+    <!-- Slider-ul de volum -->
+    <div class="volume-control">
+      <label for="volume" style="color: white; font-size: 1.2rem;">Volum</label>
+      <input type="range" id="volume" class="volume-slider" min="0" max="100" value="50">
+    </div>
   </div>
 
   <script>
@@ -114,42 +163,53 @@
     let currentTrackIndex = 0;
     const tracks = [
       { title: "Track 1", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3" },
-      { title: "Track 2", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis - FUNK DO BOUNCE [Brazilian Funk].mp3" },
-      { title: "Track 3", url: "https://www.example.com/track3.mp3" }
+      { title: "Track 2", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis - FUNK DO BOUNCE [Brazilian Funk].mp3" }, 
+      { title: "Track 3", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" }
     ];
 
     const backButton = document.getElementById('backButton');
     const playPauseButton = document.getElementById('playPauseButton');
     const nextButton = document.getElementById('nextButton');
+    const volumeSlider = document.getElementById('volume');
+
+    let audio = new Audio(tracks[currentTrackIndex].url);
+    audio.volume = volumeSlider.value / 100;
 
     // Play/Pause
     function togglePlayPause() {
       if (isPlaying) {
         playPauseButton.innerHTML = '<span class="icon">&#9654;</span>'; // Play icon
+        audio.pause();
         isPlaying = false;
-        // Aici ai putea opri muzica (folosind un player audio sau ceva similar)
-        console.log("Pause music");
       } else {
         playPauseButton.innerHTML = '<span class="icon">&#10074;&#10074;</span>'; // Pause icon
+        audio.play();
         isPlaying = true;
-        // Aici ai putea reda muzica (folosind un player audio sau ceva similar)
-        console.log("Play music");
       }
     }
 
     // Buton Next
     function nextTrack() {
       currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-      console.log("Next Track:", tracks[currentTrackIndex].title);
-      // Aici ai putea schimba la următoarea melodie
+      audio.src = tracks[currentTrackIndex].url;
+      audio.play();
+      playPauseButton.innerHTML = '<span class="icon">&#10074;&#10074;</span>'; // Pauză
+      isPlaying = true;
     }
 
     // Buton Back
     function previousTrack() {
       currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
-      console.log("Previous Track:", tracks[currentTrackIndex].title);
-      // Aici ai putea schimba la melodia anterioară
+      audio.src = tracks[currentTrackIndex].url;
+      audio.play();
+      playPauseButton.innerHTML = '<span class="icon">&#10074;&#10074;</span>'; // Pauză
+      isPlaying = true;
     }
+
+    // Setarea volumului
+    volumeSlider.addEventListener('input', function() {
+      audio.volume = volumeSlider.value / 100;
+    });
 
     // Evenimentele butoanelor
     playPauseButton.addEventListener('click', togglePlayPause);
