@@ -1,45 +1,78 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fundal Animat</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body, html {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-        }
-        .animated-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ff6b6b, #ffb6b6, #ff6b6b, #ffb6b6);
-            background-size: 400% 400%;
-            animation: gradientAnimation 5s ease infinite;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundal Animat</title>
+  <style>
+    /* Stiluri generale */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+    }
 
-        @keyframes gradientAnimation {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-    </style>
+    /* Fundal animat cu tranziții de culori */
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #ff7f7f, #ff9b7f, #ffd07f, #7fff7f, #7fffdc, #7f9bff);
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s ease infinite;
+    }
+
+    /* Textul din mijlocul ecranului */
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: white;
+      font-size: 3rem;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Animația de schimbare a culorilor */
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Adăugăm niște animație la text pentru un efect mai interesant */
+    .content h1 {
+      animation: textAnimation 3s ease-in-out infinite;
+    }
+
+    @keyframes textAnimation {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-20px); opacity: 0.8; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+  </style>
 </head>
 <body>
-    <div class="animated-background"></div>
+  <div class="background"></div>
+  <div class="content">
+    <h1>Bun venit pe această pagină cu fundal animat!</h1>
+    <p>Fundalul își schimbă culorile în mod continuu!</p>
+  </div>
+
+  <script>
+    // Poți adăuga și un efect pentru text sau interacțiune, de exemplu:
+    // Adăugăm un eveniment pentru a schimba culoarea textului la click
+    document.querySelector('.content').addEventListener('click', function() {
+      const colors = ['#ff7f7f', '#ff9b7f', '#ffd07f', '#7fff7f', '#7fffdc', '#7f9bff'];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      document.querySelector('.content h1').style.color = randomColor;
+    });
+  </script>
 </body>
 </html>
