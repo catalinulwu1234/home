@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Music Center</title>
-    <meta property="og:title" content="Music Center">
+  <meta property="og:title" content="Music Center">
   <meta property="og:description" content="Join for Discover Music For Vibe!">
-  <meta property="og:image" content="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-vector%2Fsleek-logo-design-music-streaming-service-featuring-central-musical-note-surrounded-by-musicthemed-design-design-sleek-simple-logo-music-streaming-service_181572481.htm&psig=AOvVaw0vYxHwkMTiAzUTE6mG3SuO&ust=1738606243510000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJj8v6HLpYsDFQAAAAAdAAAAABAE">
+  <meta property="og:image" content="https://www.example.com/image.jpg">
   <meta property="og:url" content="https://catalinulwu1234.github.io/home/cory.html">
-
   <meta name="twitter:title" content="Music Center">
   <meta name="twitter:description" content="Join for Discover Music For Vibe!">
-  <meta name="twitter:image" content="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-vector%2Fsleek-logo-design-music-streaming-service-featuring-central-musical-note-surrounded-by-musicthemed-design-design-sleek-simple-logo-music-streaming-service_181572481.htm&psig=AOvVaw0vYxHwkMTiAzUTE6mG3SuO&ust=1738606243510000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJj8v6HLpYsDFQAAAAAdAAAAABAE">
+  <meta name="twitter:image" content="https://www.example.com/image.jpg">
   <meta name="twitter:card" content="summary_small_image">
 
   <style>
@@ -71,6 +70,12 @@
       font-size: 1.2rem;
       border-radius: 5px;
       border: 1px solid #ccc;
+      transition: width 0.3s ease;
+    }
+
+    /* Stiluri pentru barul de căutare micșorat */
+    .search-bar.shrunk {
+      width: 30%;
     }
 
     /* Stiluri pentru butoane de control */
@@ -199,22 +204,10 @@
     let isPlaying = false;
     let currentTrackIndex = 0;
     const tracks = [
-      { title: "Track 1", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3" },
-      { title: "Track 2", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis - FUNK DO BOUNCE [Brazilian Funk].mp3" }, 
-      { title: "Track 3", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/2KE, 808iuli - X-SLIDE [ ezmp3.cc ].mp3" }, 
-      { title: "Track 4", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/AUTOMOTIVO PA PA PAPAI (Slowed) - DJ RIO [ ezmp3.cc ].mp3" }, 
-      { title: "Track 5", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Aura - ogryzek _ lofi songs _ viral lofi songs [ ezmp3.cc ].mp3" }, 
-      { title: "Track 6", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Dice and Roll (slowed) - Odetari [Edit Audio] [ ezmp3.cc ].mp3" }, 
-      { title: "Track 7", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Eu Sento Gabu! [ ezmp3.cc ].mp3" }, 
-      { title: "Track 8", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Megan Thee Stallion - Mamushi (Lyrics) (feat. Yuki Chiba) [ ezmp3.cc ].mp3" }, 
-      { title: "Track 9", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/ODETARI - KEEP UP (Lyrics) [ ezmp3.cc ].mp3" }, 
-      { title: "Track 10", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ogryzek - GLORY (Slowed) [ ezmp3.cc ].mp3" },
-      { title: "Track 11", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/ROSÉ & Bruno Mars - APT. (Lyrics) [ ezmp3.cc ].mp3" },
-      { title: "Track 12", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Shoko Kurai - Love Potion (Official Audio) [ ezmp3.cc ].mp3" },
-      { title: "Track 13", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ugly Andz x Prodbycpkshawn - Yo Bunny (Lyrics) [ ezmp3.cc ].mp3" },
-      { title: "Track 14", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/wutiwant - saraunh0ly (Lyrics) [ ezmp3.cc ].mp3" },
-      { title: "Track 15", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/.mp3" },
-      { title: "Track 16", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/.mp3" },
+      { title: "Track 1", url: "https://example.com/track1.mp3" },
+      { title: "Track 2", url: "https://example.com/track2.mp3" }, 
+      { title: "Track 3", url: "https://example.com/track3.mp3" }, 
+      // Adaugă restul pieselor aici...
     ];
 
     const backButton = document.getElementById('backButton');
@@ -232,7 +225,11 @@
     function filterTracks() {
       const query = searchBar.value.toLowerCase();
       const filteredTracks = tracks.filter(track => track.title.toLowerCase().includes(query));
+
+      // Micșorează bara de căutare după ce tastezi
+      searchBar.classList.add('shrunk');
       
+      // Arată rezultatele căutării
       searchResults.innerHTML = filteredTracks.map(track => `
         <div onclick="playTrack('${track.title}')" style="cursor: pointer; color: white; margin: 10px;">
           ${track.title}
@@ -249,6 +246,10 @@
       playPauseButton.innerHTML = '<span class="icon">&#10074;&#10074;</span>';
       isPlaying = true;
       updatePlayingText(track.title);
+
+      // Resetează bara de căutare după ce ai selectat o piesă
+      searchBar.value = '';
+      searchBar.classList.remove('shrunk');
     }
 
     // Actualizarea textului "Playing"
