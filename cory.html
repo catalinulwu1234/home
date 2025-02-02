@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fundal Animat</title>
+  <title>Catalinul's Info</title>
   <style>
     /* Stiluri generale */
     body, html {
@@ -14,6 +14,8 @@
       justify-content: center;
       align-items: center;
       font-family: 'Arial', sans-serif;
+      background-color: #f0f0f0;
+      overflow: hidden;
     }
 
     /* Fundal animat cu tranziții de culori */
@@ -45,34 +47,40 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Adăugăm niște animație la text pentru un efect mai interesant */
-    .content h1 {
-      animation: textAnimation 3s ease-in-out infinite;
+    /* Stiluri pentru butonul TikTok */
+    .button {
+      display: inline-block;
+      background-color: #1DA1F2;
+      color: white;
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 30px;
+      cursor: pointer;
+      text-decoration: none;
     }
 
-    @keyframes textAnimation {
-      0% { transform: translateY(0); opacity: 1; }
-      50% { transform: translateY(-20px); opacity: 0.8; }
-      100% { transform: translateY(0); opacity: 1; }
+    .button:hover {
+      background-color: #0d8bf2;
     }
-
   </style>
 </head>
 <body>
   <div class="background"></div>
   <div class="content">
-    <h1>Bun venit pe această pagină cu fundal animat!</h1>
-    <p>Fundalul își schimbă culorile în mod continuu!</p>
+    <h1>Catalinul's info</h1>
+    <button class="button" onclick="openTikTokLink()">TikTok</button>
   </div>
 
   <script>
-    // Poți adăuga și un efect pentru text sau interacțiune, de exemplu:
-    // Adăugăm un eveniment pentru a schimba culoarea textului la click
-    document.querySelector('.content').addEventListener('click', function() {
-      const colors = ['#ff7f7f', '#ff9b7f', '#ffd07f', '#7fff7f', '#7fffdc', '#7f9bff'];
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-      document.querySelector('.content h1').style.color = randomColor;
-    });
+    function openTikTokLink() {
+      // Afișează o fereastră de confirmare
+      const response = confirm("Vrei să intri pe Google pe contul lui?");
+      if (response) {
+        window.location.href = "https://www.tiktok.com/@Catalinulwu1234"; // Redirecționează către contul TikTok
+      }
+    }
   </script>
 </body>
 </html>
