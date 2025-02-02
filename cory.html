@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catalinul's Info</title>
+  <title>Music Center</title>
   <style>
     /* Stiluri generale */
     body, html {
@@ -30,8 +30,15 @@
       animation: gradientAnimation 10s ease infinite;
     }
 
-    /* Textul din mijlocul ecranului */
-    .content {
+    /* Animația de schimbare a culorilor */
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Stiluri pentru Music Center */
+    .music-center {
       position: relative;
       z-index: 1;
       text-align: center;
@@ -40,47 +47,114 @@
       text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
     }
 
-    /* Animația de schimbare a culorilor */
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .music-center h1 {
+      font-size: 4rem;
+      margin-bottom: 30px;
     }
 
-    /* Stiluri pentru butonul TikTok */
+    /* Stiluri pentru butoane de control */
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+    }
+
     .button {
-      display: inline-block;
       background-color: #1DA1F2;
       color: white;
-      padding: 15px 30px;
-      font-size: 20px;
+      padding: 20px 30px;
+      font-size: 1.5rem;
       border: none;
-      border-radius: 5px;
-      margin-top: 30px;
+      border-radius: 50%;
       cursor: pointer;
-      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .button:hover {
-      background-color: #0d8bf2;
+      transform: scale(1.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     }
+
+    .button:active {
+      transform: scale(0.95);
+    }
+
+    /* Stiluri pentru icoane (next, back, play/pause) */
+    .icon {
+      font-size: 2rem;
+    }
+
   </style>
 </head>
 <body>
   <div class="background"></div>
-  <div class="content">
-    <h1>Catalinul's info</h1>
-    <button class="button" onclick="openTikTokLink()">TikTok</button>
+  <div class="music-center">
+    <h1>Music Center</h1>
+    <div class="controls">
+      <!-- Buton pentru Back -->
+      <button class="button" id="backButton">
+        <span class="icon">&#9664;</span>
+      </button>
+      <!-- Buton pentru Play/Pause -->
+      <button class="button" id="playPauseButton">
+        <span class="icon">&#9654;</span>
+      </button>
+      <!-- Buton pentru Next -->
+      <button class="button" id="nextButton">
+        <span class="icon">&#9654;&#9654;</span>
+      </button>
+    </div>
   </div>
 
   <script>
-    function openTikTokLink() {
-      // Afișează o fereastră de confirmare
-      const response = confirm("Vrei să intri pe Google pe contul lui?");
-      if (response) {
-        window.location.href = "https://www.tiktok.com/@Catalinulwu1234"; // Redirecționează către contul TikTok
+    // Simularea unui control de muzică
+    let isPlaying = false;
+    let currentTrackIndex = 0;
+    const tracks = [
+      { title: "Track 1", url: "https://www.example.com/track1.mp3" },
+      { title: "Track 2", url: "https://www.example.com/track2.mp3" },
+      { title: "Track 3", url: "https://www.example.com/track3.mp3" }
+    ];
+
+    const backButton = document.getElementById('backButton');
+    const playPauseButton = document.getElementById('playPauseButton');
+    const nextButton = document.getElementById('nextButton');
+
+    // Play/Pause
+    function togglePlayPause() {
+      if (isPlaying) {
+        playPauseButton.innerHTML = '<span class="icon">&#9654;</span>'; // Play icon
+        isPlaying = false;
+        // Aici ai putea opri muzica (folosind un player audio sau ceva similar)
+        console.log("Pause music");
+      } else {
+        playPauseButton.innerHTML = '<span class="icon">&#10074;&#10074;</span>'; // Pause icon
+        isPlaying = true;
+        // Aici ai putea reda muzica (folosind un player audio sau ceva similar)
+        console.log("Play music");
       }
     }
+
+    // Buton Next
+    function nextTrack() {
+      currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+      console.log("Next Track:", tracks[currentTrackIndex].title);
+      // Aici ai putea schimba la următoarea melodie
+    }
+
+    // Buton Back
+    function previousTrack() {
+      currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+      console.log("Previous Track:", tracks[currentTrackIndex].title);
+      // Aici ai putea schimba la melodia anterioară
+    }
+
+    // Evenimentele butoanelor
+    playPauseButton.addEventListener('click', togglePlayPause);
+    nextButton.addEventListener('click', nextTrack);
+    backButton.addEventListener('click', previousTrack);
   </script>
 </body>
 </html>
