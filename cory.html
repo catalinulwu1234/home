@@ -215,6 +215,10 @@
     playPauseButton.addEventListener('click', togglePlayPause);
     nextButton.addEventListener('click', nextTrack);
     backButton.addEventListener('click', previousTrack);
+
+    // Redare continua - trecerea la urmatoarea piesa dupa ce se termina una
+    audio.addEventListener('ended', nextTrack);
+
   </script>
 </body>
 </html>
