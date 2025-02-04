@@ -12,159 +12,192 @@
   <meta name="twitter:description" content="Join for Discover Music For Vibe!">
   <meta name="twitter:image" content="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fpremium-vector%2Fsleek-logo-design-music-streaming-service-featuring-central-musical-note-surrounded-by-musicthemed-design-design-sleek-simple-logo-music-streaming-service_181572481.htm&psig=AOvVaw0vYxHwkMTiAzUTE6mG3SuO&ust=1738606243510000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJj8v6HLpYsDFQAAAAAdAAAAABAE">
   <meta name="twitter:card" content="summary_small_image">
-  <style>
-    /* Stiluri generale */
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Arial', sans-serif;
-      background-color: #f0f0f0;
-      overflow: hidden;
-    }
+<style>/* Stiluri generale */
+/* Stiluri generale */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  overflow: hidden;
+}
 
-    /* Fundal animat cu tranziții de culori */
-    .background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, #ff7f7f, #ff9b7f, #ffd07f, #7fff7f, #7fffdc, #7f9bff);
-      background-size: 400% 400%;
-      animation: gradientAnimation 10s ease infinite;
-    }
+/* Fundal animat cu tranziții de culori */
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #ff7f7f, #ff9b7f, #ffd07f, #7fff7f, #7fffdc, #7f9bff);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
 
-    /* Animația de schimbare a culorilor */
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+/* Animația de schimbare a culorilor */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-    /* Stiluri pentru Music Center */
-    .music-center {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      color: white;
-      font-size: 3rem;
-      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-      max-width: 80%;
-    }
+/* Stiluri pentru Music Center */
+.music-center {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  font-size: 3rem;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  max-width: 80%;
+}
 
-    .music-center h1 {
-      font-size: 4rem;
-      margin-bottom: 30px;
-    }
+.music-center h1 {
+  font-size: 4rem;
+  margin-bottom: 30px;
+}
 
-    /* Stiluri pentru barul de căutare */
-    .search-bar {
-      width: 60%;
-      padding: 10px;
-      margin-bottom: 30px;
-      font-size: 1.2rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      transition: width 0.3s ease;
-    }
+/* Stiluri pentru barul de căutare */
+.search-bar {
+  width: 60%;
+  padding: 10px;
+  margin-bottom: 30px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: width 0.3s ease;
+}
 
-    /* Stiluri pentru barul de căutare micșorat */
-    .search-bar.shrunk {
-      width: 30%;
-    }
+/* Stiluri pentru barul de căutare micșorat */
+.search-bar.shrunk {
+  width: 30%;
+}
 
-    /* Stiluri pentru butoane de control */
-    .controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 30px;
-    }
+/* Stiluri pentru butoane de control */
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
 
-    .button {
-      background-color: #1DA1F2;
-      color: white;
-      padding: 20px 30px;
-      font-size: 1.5rem;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+.button {
+  background-color: #1DA1F2;
+  color: white;
+  padding: 20px 30px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    .button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    }
+.button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
 
-    .button:active {
-      transform: scale(0.95);
-    }
+.button:active {
+  transform: scale(0.95);
+}
 
-    /* Stiluri pentru icoane (next, back, play/pause) */
-    .icon {
-      font-size: 2rem;
-    }
+/* Stiluri pentru icoane (next, back, play/pause) */
+.icon {
+  font-size: 2rem;
+}
 
-    /* Stiluri pentru slider-ul de volum */
-    .volume-control {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 40px;
-    }
+/* Stiluri pentru slider-ul de volum */
+.volume-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
 
-    .volume-slider {
-      width: 200px;
-      margin-top: 10px;
-      -webkit-appearance: none;
-      appearance: none;
-      height: 10px;
-      background: #ddd;
-      border-radius: 5px;
-      outline: none;
-      transition: background 0.3s;
-    }
+.volume-slider {
+  width: 200px;
+  margin-top: 10px;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+  transition: background 0.3s;
+}
 
-    .volume-slider:hover {
-      background: #ccc;
-    }
+.volume-slider:hover {
+  background: #ccc;
+}
 
-    .volume-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      background: #1DA1F2;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #1DA1F2;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
 
-    .volume-slider::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
-      background: #1DA1F2;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
+.volume-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #1DA1F2;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
 
-    /* Stiluri pentru textul "Playing" */
-    .playing-text {
-      margin-top: 20px;
-      font-size: 1.2rem;
-      color: white;
-    }
-  </style>
+/* Stiluri pentru textul "Playing" */
+.playing-text {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* Stiluri pentru panoul stâng cu muzici salvate */
+.left-panel {
+  position: fixed; /* Asigură că panoul rămâne fix pe stânga */
+  top: 10%; /* Poziționare de sus, lăsând un spațiu mai mare față de vârf */
+  left: 0; /* Poziționare pe marginea stângă */
+  width: 250px; /* Lățimea panoului */
+  margin-right: 20px; /* Margine dreapta pentru un spațiu între panou și restul elementelor */
+  background-color: #333; /* Fundal închis */
+  padding: 30px; /* Mai mult padding pentru un aspect mai aerisit */
+  border-radius: 10px; /* Colțuri rotunjite */
+  color: white; /* Textul va fi alb */
+  z-index: 10; /* Asigură că panoul este deasupra altor elemente */
+  height: 80%; /* Setăm o înălțime fixă a panoului, pentru a nu se întinde pe toată înălțimea */
+  overflow-y: auto; /* Permite scroll pentru lista de muzici dacă este prea lungă */
+}
+
+/* Stiluri pentru lista de muzici salvate */
+.saved-music-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.saved-music-item {
+  margin: 15px 0; /* Distanță mai mare între elemente */
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.saved-music-item:hover {
+  color: #1DA1F2; /* Culoare albastră la hover */
+}
+
+</style>
 </head>
 <body>
-  <div class="background"></div>
   <div class="music-center">
     <h1>Music Center</h1>
 
@@ -197,69 +230,140 @@
 
     <!-- Textul care indică piesa redată -->
     <div id="playingText" class="playing-text">Playing: </div>
+
+    <!-- Panou stâng cu muzici salvate -->
+    <div class="left-panel">
+      <h3>Muzici Salvate</h3>
+      <ul id="savedMusicList" class="saved-music-list">
+        <!-- Aici vor apărea muzicile salvate -->
+      </ul>
+    </div>
   </div>
 
   <script>
     let isPlaying = false;
     let currentTrackIndex = 0;
     const tracks = [
-      { title: "FE!N (Official Audio) ft. Playboi Carti", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis%20Scott%20-%20FE!N%20(Official%20Audio)%20ft.%20Playboi%20Carti.mp3" },
-      { title: "FUNK DO BOUNCE [Brazilian Funk]", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis%20-%20FUNK%20DO%20BOUNCE%20[Brazilian%20Funk].mp3" }, 
-      { title: "2KE", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Faik%20-%202KE.mp3" },
+      { title: "FE!N (Official Audio) ft. Playboi Carti", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3" },
+      { title: "FUNK DO BOUNCE [Brazilian Funk]", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis - FUNK DO BOUNCE [Brazilian Funk].mp3" }, 
+      { title: "2KE", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/2KE, 808iuli - X-SLIDE [ ezmp3.cc ].mp3" }, 
+      { title: "AUTOMOTIVO PA PA PAPAI", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/AUTOMOTIVO PA PA PAPAI (Slowed) - DJ RIO [ ezmp3.cc ].mp3" }, 
+      { title: "Aura", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Aura - ogryzek _ lofi songs _ viral lofi songs [ ezmp3.cc ].mp3" }, 
+      { title: "Dice and Roll (slowed) - Odetari", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Dice and Roll (slowed) - Odetari [Edit Audio] [ ezmp3.cc ].mp3" }, 
+      { title: "Eu Sento Gabu!", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Eu Sento Gabu! [ ezmp3.cc ].mp3" }, 
+      { title: "Mamushi", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Megan Thee Stallion - Mamushi (Lyrics) (feat. Yuki Chiba) [ ezmp3.cc ].mp3" }, 
+      { title: "KEEP UP (Lyrics)", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/ODETARI - KEEP UP (Lyrics) [ ezmp3.cc ].mp3" }, 
+      { title: "GLORY (Slowed)", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ogryzek - GLORY (Slowed) [ ezmp3.cc ].mp3" },
+      { title: "APT", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/ROSÉ & Bruno Mars - APT. (Lyrics) [ ezmp3.cc ].mp3" },
+      { title: "Love Potion", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Shoko Kurai - Love Potion (Official Audio) [ ezmp3.cc ].mp3" },
+      { title: "Yo bunny", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ugly Andz x Prodbycpkshawn - Yo Bunny (Lyrics) [ ezmp3.cc ].mp3" },
+      { title: "wutiwant", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/wutiwant - saraunh0ly (Lyrics) [ ezmp3.cc ].mp3" },
+      { title: "she know", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/J. Cole - She Knows (Lyrics) [ ezmp3.cc ].mp3" },
+      { title: "nothing", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/.mp3" },
     ];
-    let audio = new Audio(tracks[currentTrackIndex].url);
-    let searchResults = [];
 
-    function updatePlayingText() {
-      document.getElementById("playingText").textContent = `Playing: ${tracks[currentTrackIndex].title}`;
+    const backButton = document.getElementById('backButton');
+    const playPauseButton = document.getElementById('playPauseButton');
+    const nextButton = document.getElementById('nextButton');
+    const volumeSlider = document.getElementById('volume');
+    const searchBar = document.getElementById('searchBar');
+    const searchResults = document.getElementById('searchResults');
+    const playingText = document.getElementById('playingText');
+    const savedMusicList = document.getElementById('savedMusicList');
+
+    let audio = new Audio(tracks[currentTrackIndex].url);
+    audio.volume = volumeSlider.value / 100;
+
+    // Funcția de căutare și filtrare a pieselor
+    function filterTracks() {
+      const query = searchBar.value.toLowerCase();
+      const filteredTracks = tracks.filter(track => track.title.toLowerCase().includes(query));
+
+      // Arată rezultatele căutării
+      searchResults.innerHTML = filteredTracks.map(track => `
+        <div onclick="playTrack('${track.title}')" style="cursor: pointer; color: white; margin: 10px;">
+          ${track.title}
+        </div>
+      `).join('');
     }
 
-    document.getElementById("playPauseButton").addEventListener("click", () => {
-      if (isPlaying) {
-        audio.pause();
-        document.getElementById("playPauseButton").innerHTML = `<span class="icon">&#9654;</span>`;
-      } else {
-        audio.play();
-        document.getElementById("playPauseButton").innerHTML = `<span class="icon">&#10074;&#10074;</span>`;
-      }
-      isPlaying = !isPlaying;
-    });
+    // Funcția de redare a piesei din căutare
+    function playTrack(trackTitle) {
+      const track = tracks.find(t => t.title === trackTitle);
+      currentTrackIndex = tracks.indexOf(track);
+      audio.src = track.url;
+      audio.play();
+      playPauseButton.innerHTML = '<span class="icon">&#10074;&#10074;</span>';
+      isPlaying = true;
+      updatePlayingText(track.title);
+    }
 
-    document.getElementById("nextButton").addEventListener("click", () => {
+    // Actualizarea textului "Playing"
+    function updatePlayingText(trackTitle) {
+      playingText.textContent = `Playing: ${trackTitle}`;
+    }
+
+    // Play/Pause
+    function togglePlayPause() {
+      if (isPlaying) {
+        playPauseButton.innerHTML = '<span class="icon">&#9654;</span>'; // Play icon
+        audio.pause();
+        isPlaying = false;
+      } else {
+        playPauseButton.innerHTML = '<span class="icon">&#10074;&#10074;</span>'; // Pause icon
+        audio.play();
+        isPlaying = true;
+      }
+    }
+
+    // Buton Next
+    function nextTrack() {
       currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
       audio.src = tracks[currentTrackIndex].url;
       audio.play();
-      updatePlayingText();
-    });
+      playPauseButton.innerHTML = '<span class="icon">&#10074;&#10074;</span>';
+      isPlaying = true;
+      updatePlayingText(tracks[currentTrackIndex].title);
+    }
 
-    document.getElementById("backButton").addEventListener("click", () => {
+    // Buton Back
+    function previousTrack() {
       currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
       audio.src = tracks[currentTrackIndex].url;
       audio.play();
-      updatePlayingText();
-    });
-
-    document.getElementById("volume").addEventListener("input", (event) => {
-      audio.volume = event.target.value / 100;
-    });
-
-    function filterTracks() {
-      let query = document.getElementById("searchBar").value.toLowerCase();
-      searchResults = tracks.filter(track => track.title.toLowerCase().includes(query));
-      displaySearchResults();
+      playPauseButton.innerHTML = '<span class="icon">&#10074;&#10074;</span>';
+      isPlaying = true;
+      updatePlayingText(tracks[currentTrackIndex].title);
     }
 
-    function displaySearchResults() {
-      let resultsDiv = document.getElementById("searchResults");
-      resultsDiv.innerHTML = "";
-      searchResults.forEach(track => {
-        let trackDiv = document.createElement("div");
-        trackDiv.textContent = track.title;
-        resultsDiv.appendChild(trackDiv);
-      });
+    // Setarea volumului
+    volumeSlider.addEventListener('input', function() {
+      audio.volume = volumeSlider.value / 100;
+    });
+
+    // Salvarea melodiei
+    function saveMusic() {
+      const trackTitle = playingText.textContent.replace('Playing: ', '');
+      if (!Array.from(savedMusicList.children).some(item => item.textContent === trackTitle)) {
+        const savedItem = document.createElement('li');
+        savedItem.textContent = trackTitle;
+        savedItem.className = 'saved-music-item';
+        savedItem.onclick = function() { playTrack(trackTitle); };
+        savedMusicList.appendChild(savedItem);
+      }
     }
 
-    updatePlayingText(); // Initial text update
+    // Salvarea melodiei când dai click pe "Playing"
+    playingText.addEventListener('click', saveMusic);
+
+    // Evenimentele butoanelor
+    playPauseButton.addEventListener('click', togglePlayPause);
+    nextButton.addEventListener('click', nextTrack);
+    backButton.addEventListener('click', previousTrack);
+    searchBar.addEventListener('input', filterTracks);
+
+    // Redare continua - trecerea la urmatoarea piesa dupa ce se termina una
+    audio.addEventListener('ended', nextTrack);
   </script>
 </body>
 </html>
