@@ -5,200 +5,215 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Music Center</title>
   <style>
-    /* Stiluri pentru favorite */
-    .favorite-star {
-      font-size: 1.5rem;
-      color: gray;
-      cursor: pointer;
-      transition: color 0.3s;
+    /* Stiluri generale */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f0f0;
+      overflow: hidden;
     }
 
-    .favorite-star.active {
-      color: gold;
+    .container {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 20px;
     }
 
-    /* Stiluri pentru lista de favorite */
-    .favorites-list {
-      max-height: 150px;
-      overflow-y: scroll;
-      margin-top: 30px;
-      color: white;
-      font-size: 1.2rem;
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.6);
+    /* Panel stânga pentru muzicile salvate */
+    .left-panel {
+      width: 250px;
+      margin-right: 20px;
+      background-color: #333;
+      padding: 20px;
       border-radius: 10px;
+      color: white;
     }
 
-    .favorites-list div {
-      margin: 5px 0;
+    .saved-music-list {
+      margin-top: 20px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .saved-music-item {
+      padding: 8px;
+      cursor: pointer;
+      background-color: #444;
+      margin-bottom: 8px;
+      border-radius: 5px;
+    }
+
+    .saved-music-item:hover {
+      background-color: #555;
+    }
+
+    /* Panou drept pentru controlul playerului */
+    .right-panel {
+      flex-grow: 1;
+      text-align: center;
+      color: white;
+    }
+
+    .search-bar {
+      width: 60%;
+      padding: 10px;
+      margin-bottom: 30px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .button {
+      background-color: #1DA1F2;
+      color: white;
+      padding: 20px 30px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+    }
+
+    /* Textul care indică piesa redată */
+    .playing-text {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <div class="background"></div>
-  <div class="music-center">
-    <h1>Music Center</h1>
-
-    <!-- Bar de căutare -->
-    <input type="text" id="searchBar" class="search-bar" placeholder="Căutare muzică..." oninput="filterTracks()">
-    <!-- Listă de trackuri care vor apărea pe măsură ce scrii -->
-    <div id="searchResults"></div>
-
-    <!-- Controale muzică -->
-    <div class="controls">
-      <button class="button" id="backButton">
-        <span class="icon">&#9664;</span>
-      </button>
-      <button class="button" id="playPauseButton">
-        <span class="icon">&#9654;</span>
-      </button>
-      <button class="button" id="nextButton">
-        <span class="icon">&#9654;&#9654;</span>
-      </button>
+  <div class="container">
+    <!-- Panelul stâng cu muzicile salvate -->
+    <div class="left-panel">
+      <h3>Muzici Salvate</h3>
+      <ul id="savedMusicList" class="saved-music-list">
+        <!-- Aici vor apărea muzicile salvate -->
+      </ul>
     </div>
 
-    <!-- Slider-ul de volum -->
-    <div class="volume-control">
-      <label for="volume" style="color: white; font-size: 1.2rem;">Volum</label>
-      <input type="range" id="volume" class="volume-slider" min="0" max="100" value="50">
-    </div>
+    <!-- Panelul drept cu playerul -->
+    <div class="right-panel">
+      <input type="text" id="searchBar" class="search-bar" placeholder="Căutare muzică..." oninput="filterTracks()">
+      <div id="searchResults"></div>
 
-    <!-- Textul care indică piesa redată -->
-    <div id="playingText" class="playing-text">Playing: </div>
+      <div class="controls">
+        <button class="button" id="backButton">&#9664;</button>
+        <button class="button" id="playPauseButton">&#9654;</button>
+        <button class="button" id="nextButton">&#9654;&#9654;</button>
+      </div>
 
-    <!-- Lista de favorite -->
-    <div class="favorites-list" id="favoritesList">
-      <strong>Sunete salvate (favorite):</strong>
+      <div id="playingText" class="playing-text">Playing: </div>
     </div>
   </div>
 
   <script>
-    let isPlaying = false;
-    let currentTrackIndex = 0;
     const tracks = [
-      { title: "FE!N (Official Audio) ft. Playboi Carti", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis Scott - FE!N (Official Audio) ft. Playboi Carti.mp3" },
-      { title: "FUNK DO BOUNCE [Brazilian Funk]", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis - FUNK DO BOUNCE [Brazilian Funk].mp3" },
-      // Adaugă mai multe piese aici
+      { title: "FE!N (Official Audio) ft. Playboi Carti", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Travis%20Scott%20-%20FE!N%20(Official%20Audio)%20ft.%20Playboi%20Carti.mp3" },
+      { title: "FUNK DO BOUNCE [Brazilian Funk]", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/Ariis%20-%20FUNK%20DO%20BOUNCE%20[Brazilian%20Funk].mp3" }, 
+      { title: "2KE", url: "https://raw.githubusercontent.com/catalinulwu1234/home/refs/heads/main/2KE,%20808iuli%20-%20X-SLIDE%20%5Bezmp3.cc%5D.mp3" }
+      // Adaugă restul pieselor aici...
     ];
 
+    let isPlaying = false;
+    let currentTrackIndex = 0;
     let audio = new Audio(tracks[currentTrackIndex].url);
-    audio.volume = document.getElementById('volume').value / 100;
-
-    const backButton = document.getElementById('backButton');
-    const playPauseButton = document.getElementById('playPauseButton');
-    const nextButton = document.getElementById('nextButton');
-    const volumeSlider = document.getElementById('volume');
     const searchBar = document.getElementById('searchBar');
     const searchResults = document.getElementById('searchResults');
     const playingText = document.getElementById('playingText');
-    const favoritesList = document.getElementById('favoritesList');
+    const savedMusicList = document.getElementById('savedMusicList');
+    const playPauseButton = document.getElementById('playPauseButton');
+    const backButton = document.getElementById('backButton');
+    const nextButton = document.getElementById('nextButton');
 
-    const favoriteTracks = [];
-
-    // Funcție pentru a actualiza textul "Playing"
-    function updatePlayingText(trackTitle) {
-      playingText.textContent = `Playing: ${trackTitle}`;
+    function filterTracks() {
+      const query = searchBar.value.toLowerCase();
+      const filteredTracks = tracks.filter(track => track.title.toLowerCase().includes(query));
+      searchResults.innerHTML = filteredTracks.map(track => `
+        <div onclick="playTrack('${track.title}')" style="cursor: pointer; color: white; margin: 10px;">
+          ${track.title}
+        </div>
+      `).join('');
     }
 
-    // Funcție pentru a adăuga o piesă la favorite
-    function toggleFavorite(track) {
-      const index = favoriteTracks.indexOf(track);
-      const star = document.getElementById(`star-${track.title}`);
-      
-      if (index === -1) {
-        favoriteTracks.push(track);
-        star.classList.add('active');
-      } else {
-        favoriteTracks.splice(index, 1);
-        star.classList.remove('active');
-      }
-      
-      updateFavoritesList();
-    }
-
-    // Actualizează lista de favorite
-    function updateFavoritesList() {
-      favoritesList.innerHTML = "<strong>Sunete salvate (favorite):</strong>";
-      favoriteTracks.forEach(track => {
-        const favoriteDiv = document.createElement('div');
-        favoriteDiv.textContent = track.title;
-        favoritesList.appendChild(favoriteDiv);
-      });
-    }
-
-    // Funcție pentru a reda o piesă
     function playTrack(trackTitle) {
       const track = tracks.find(t => t.title === trackTitle);
       currentTrackIndex = tracks.indexOf(track);
       audio.src = track.url;
       audio.play();
-      playPauseButton.innerHTML = '<span class="icon">&#10074;&#10074;</span>';
+      playPauseButton.innerHTML = '&#10074;&#10074;';
       isPlaying = true;
       updatePlayingText(track.title);
-      
-      // Resetarea căutării
-      searchBar.value = '';
-      searchResults.innerHTML = '';
     }
 
-    // Eveniment pentru Play/Pause
+    function updatePlayingText(trackTitle) {
+      playingText.textContent = `Playing: ${trackTitle}`;
+    }
+
     function togglePlayPause() {
       if (isPlaying) {
-        playPauseButton.innerHTML = '<span class="icon">&#9654;</span>';
         audio.pause();
+        playPauseButton.innerHTML = '&#9654;';
         isPlaying = false;
       } else {
-        playPauseButton.innerHTML = '<span class="icon">&#10074;&#10074;</span>';
         audio.play();
+        playPauseButton.innerHTML = '&#10074;&#10074;';
         isPlaying = true;
       }
     }
 
-    // Funcție pentru următoarea piesă
     function nextTrack() {
       currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
       audio.src = tracks[currentTrackIndex].url;
       audio.play();
-      playPauseButton.innerHTML = '<span class="icon">&#10074;&#10074;</span>';
+      playPauseButton.innerHTML = '&#10074;&#10074;';
       isPlaying = true;
       updatePlayingText(tracks[currentTrackIndex].title);
     }
 
-    // Funcție pentru piesa anterioară
     function previousTrack() {
       currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
       audio.src = tracks[currentTrackIndex].url;
       audio.play();
-      playPauseButton.innerHTML = '<span class="icon">&#10074;&#10074;</span>';
+      playPauseButton.innerHTML = '&#10074;&#10074;';
       isPlaying = true;
       updatePlayingText(tracks[currentTrackIndex].title);
     }
 
-    // Setarea volumului
-    volumeSlider.addEventListener('input', function() {
-      audio.volume = volumeSlider.value / 100;
-    });
-
-    // Căutare și redare track
-    function filterTracks() {
-      const query = searchBar.value.toLowerCase();
-      const filteredTracks = tracks.filter(track => track.title.toLowerCase().includes(query));
-
-      searchResults.innerHTML = filteredTracks.map(track => `
-        <div onclick="playTrack('${track.title}')">
-          ${track.title} <span id="star-${track.title}" class="favorite-star" onclick="toggleFavorite(${JSON.stringify(track)})">&#9733;</span>
-        </div>
-      `).join('');
+    function saveMusic() {
+      const trackTitle = playingText.textContent.replace('Playing: ', '');
+      if (!Array.from(savedMusicList.children).some(item => item.textContent === trackTitle)) {
+        const savedItem = document.createElement('li');
+        savedItem.textContent = trackTitle;
+        savedItem.className = 'saved-music-item';
+        savedItem.onclick = function() { playTrack(trackTitle); };
+        savedMusicList.appendChild(savedItem);
+      }
     }
 
-    // Adăugăm evenimentele pentru butoane
     playPauseButton.addEventListener('click', togglePlayPause);
     nextButton.addEventListener('click', nextTrack);
     backButton.addEventListener('click', previousTrack);
     searchBar.addEventListener('input', filterTracks);
 
-    // Redare continuă
-    audio.addEventListener('ended', nextTrack);
+    // Salvarea melodiei când dai click pe "Playing"
+    playingText.addEventListener('click', saveMusic);
 
   </script>
 </body>
